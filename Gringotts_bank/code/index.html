@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dashboardViewer">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <title>Gringotts Customer Dashboard</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+    <script src="appModule.js"></script>
+    <script src="dashboardController.js"></script>
+    <script src="cinController.js"></script>    
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="UICSS.css">
+    <script src="TF_script.js"></script>
+</head>
+
+<body class="fix-header fix-sidebar card-no-border" >
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    <div id="main-wrapper">
+
+            <header class="topbar">
+                <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+                    <div class="navbar-header">
+                        <!-- <a class="navbar-brand" href="index.html">
+                        <b>
+
+                            <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" width=200px height=50px />
+
+                        </b>
+                    </a> -->
+                        <a class="navbar-brand" href="index.html">
+
+                            <b>
+
+                                <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+
+                            </b>
+
+                            <span>
+
+                                <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" height="45px" />
+                            </span>
+                        </a>
+                    </div>
+                    <div class="navbar-collapse" ng-controller="cinController">
+                        <ul class="navbar-nav .mr-auto mt-md-0 ">
+                            <li class="nav-item">
+                                <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)">
+                                    <i class="ti-menu"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <form class="app-search p-l-20" ng-submit="search(username)">
+                                    <input type="text" class="form-control" placeholder="CIN" ng-model="username">
+                                    <a class="srh-btn">
+                                        <i class="ti-search" ng-click="search(username)"></i>
+                                    </a>
+                                </form>
+                            </li>
+                        </ul>
+                        <!-- <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                        </li>
+                    </ul> -->
+                    </div>
+                </nav>
+            </header>
+
+            <aside class="left-sidebar">
+                <div class="scroll-sidebar"  ng-controller="DashboardController">
+                    <nav class="sidebar-nav text-themecolor">
+                        <h2 class="text-themecolor" style="text-align:center;">
+                            Customer Details
+                        </h2>
+                        <table id="sidebarnav" style="text-align:left;" ng-show="user" >
+                            <tr>
+                                <td ng-if="user.cin">
+                                    <b>Customer ID:</b>
+                                </td>
+                                <td>{{user.cin}}</td>
+                            </tr>
+                            <tr>
+                                <td ng-if="user.name">
+                                    <b>Name:</b>
+                                </td>
+                                <td>{{user.name}}</td>
+                            </tr>
+                            <tr>
+                                <td ng-if="user.customerType">
+                                    <b>Customer Type:</b>
+                                </td>
+                                <td>{{user.customerType}}</td>
+                            </tr>
+                            <tr>
+                                <td ng-if="user.address">
+                                    <b>Address:</b>
+                                </td>
+                                <td>{{user.address}}</td>
+                            </tr>
+                            <tr>
+                                <td ng-if="user.residenceCountry">
+                                    <b>Country of Residence:</b>
+                                </td>
+                                <td>{{user.residenceCountry}}</td>
+                            </tr>
+                            <tr>
+                                <td ng-if="user.incorporationCountry">
+                                    <b>Country of Incorporation:</b>
+                                </td>
+                                <td>{{user.incorporationCountry}}</td>
+                            </tr>
+                            <tr>
+                                <td ng-if="user.industryClassification">
+                                    <b>Industry Classification:
+                                        <b>
+                                </td>
+                                <td>{{user.industryClassification}}</td>
+                            </tr>
+                        </table>
+                    </nav>
+                </div>
+            </aside>
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col-md-6 col-8 align-self-center">
+                        <h1 class="text-themecolor m-b-0 m-t-0">
+                            Customer Dashboard
+                        </h1>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card" style="height: 400px;">
+                            <div class="card-block">
+                                <h4 class="card-title">Retail Banking</h4>
+                                <!-- <div class="text-right">
+                                    <h2 class="font-light m-b-0">xdgnsdfg</h2>
+                                    <span class="text-muted"></span>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card" style="height: 400px;">
+                            <div class="card-block">
+                                <h4 class="card-title">Asset Finance</h4>
+                                <div class="text-right">
+                                    <h2 class="font-light m-b-0"> </h2>
+                                    <span class="text-muted"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card" style="height: 400px">
+                            <div class="card-block">
+                                <h4 class="card-title">Trade Finance</h4>
+                                <div id="tradeWidget" ng-controller="TFAppController" ng-show="userDetails">
+                                        <!-- <h1>Trade Finance</h1> -->
+                                        <div id="widget" >
+                                            <div id="piechart"></div>
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr class="danger">
+                                                        <td>Total Exposure</td>
+                                                        <td>
+                                                            <b>£{{ userDetails.message['Total Exposure'] }}</b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="info">
+                                                        <td>Work in Progress</td>
+                                                        <td>
+                                                            <b>£{{ userDetails.message['Work in Progress'] }}</b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr></tr>
+                                                    <tr class="success">
+                                                        <td>LCs expiring in next 30 days</td>
+                                                        <td>
+                                                            <b>{{ userDetails.message['Expiring LC'] }}</b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="success">
+                                                        <td>Expiring Amount</td>
+                                                        <td>
+                                                            <b>£{{ userDetails.message['Expiring Amount'] }}</b>
+                                                        </td>
+                                                    </tr>
+                                                    </tr>
+                                
+                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 ">
+                        <div class="card" style="height: 400px;">
+                            <div class="card-block ">
+                                <h4 class="card-title">Supply Chain Management</h4>
+                                <div class="text-right">
+                                    <h2 class="font-light m-b-0"> </h2>
+                                    <span class="text-muted"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer class="footer text-center">
+                © 2018 Gringotts Bank
+            </footer>
+        </div>
+    </div>
+    <script src="../assets/plugins/jquery/jquery.min.js"></script>
+
+    <script src="js/jquery.slimscroll.js"></script>
+    <script src="js/waves.js"></script>
+
+    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script src="../assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/sidebarmenu.js"></script>
+    <script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+    
+        // Draw the chart and set the chart values
+        function drawChart(x, y) {
+    
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Work in Progress', x],
+                ['Total Exposure', y],
+    
+            ]);
+    
+            // Optional; add a title and set the width and height of the chart
+            var options = { 'title': 'Letter of Credit', 'width': 250, 'height': 300 };
+    
+            // Display the chart inside the <div> element with id="piechart"
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+</body>
+
+</html>

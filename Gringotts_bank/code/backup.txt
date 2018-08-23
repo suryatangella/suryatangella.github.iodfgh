@@ -1,0 +1,36 @@
+(function () {
+    var myapp = angular.module("dashboardViewer");
+    var cinController = function ($scope,$rootScope) {
+         $scope.username = "1500000021";
+         $rootScope.rootusername = $scope.username;
+        // console.log("cinController");
+        // console.log($scope.username);
+        // console.log($rootScope.rootusername);
+        $scope.search = function (username) {
+           console.log("search!");
+            //var cin=$scope.username;
+           $rootScope.rootusername = $scope.username;
+            //dash(cin);
+            
+        };
+        $scope.username = "1500000021";
+    };
+    myapp.controller("cinController", cinController);
+
+}());
+
+
+(function () {
+    var app = angular.module("dashboardViewer");
+    var DashboardController = function ($scope, $http,$rootScope) {
+
+            $http.get("https://cors.io/?https://99sszhzro1.execute-api.us-east-1.amazonaws.com/customers/info?cin=" + $rootScope.rootusername)
+                .then(function (response) {
+                    //console.log(response.data);
+                    $scope.user = response.data;
+                    //console.log('SEARCH');
+                });
+
+    };
+    app.controller("DashboardController", DashboardController);
+}());
